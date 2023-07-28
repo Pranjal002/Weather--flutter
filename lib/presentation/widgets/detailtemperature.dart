@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weatherstation/presentation/presentation/future_temperature.dart';
+import 'package:weatherstation/presentation/provider/Tommorow_state.dart';
 import 'package:weatherstation/presentation/widgets/Hour_temperature.dart';
 import 'package:weatherstation/presentation/widgets/LineChartWidget.dart';
 
@@ -14,16 +16,18 @@ class Detailed_temperature extends StatefulWidget {
 }
 
 class _Detailed_temperatureState extends State<Detailed_temperature> {
-  bool showNextDay = false; // Track whether to show the next day's values
+  // Track whether to show the next day's values
 
   _performFunction() {
-    setState(() {
-      showNextDay = !showNextDay; // Toggle the showNextDay value
-    });
+    // setState(() {
+    //   showNextDay = !showNextDay; // Toggle the showNextDay value
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    final tomorrow = Provider.of<tomorrowState>(context);
+    bool showNextDay = false;
     String _formatTime(int hour, int minute) {
       String hourString = hour.toString().padLeft(2, '0');
       String minuteString = minute.toString().padLeft(2, '0');
@@ -81,54 +85,57 @@ class _Detailed_temperatureState extends State<Detailed_temperature> {
           return Container(
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    InkWell(
-                      onTap: _performFunction,
-                      child: Text(
-                        'Today',
-                        style: TextStyle(fontSize: 15),
+                Consumer(builder: (context, tomorrowState, _) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        width: 20,
                       ),
-                    ),
-                    SizedBox(
-                      width: 18,
-                    ),
-                    InkWell(
-                      onTap: _performFunction,
-                      child: Text(
-                        'Tomorrow',
-                        style: TextStyle(fontSize: 15),
+                      InkWell(
+                        onTap: () => tomorrow.onToday(),
+                        child: Text(
+                          'Today',
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 18,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Future_Temperature(
-                                dayList: day1Hours, tempList: day1Temperature),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Text(
-                            'Next 7 days',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          Icon(Icons.arrow_right),
-                        ],
+                      SizedBox(
+                        width: 18,
                       ),
-                    ),
-                  ],
-                ),
+                      InkWell(
+                        onTap: () => tomorrow.onClick(),
+                        child: Text(
+                          'Tomorrow',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 18,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Future_Temperature(
+                                  dayList: day1Hours,
+                                  tempList: day1Temperature),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              'Next 7 days',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            Icon(Icons.arrow_right),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }),
                 SizedBox(
                   height: 20,
                 ),
@@ -161,11 +168,11 @@ class _Detailed_temperatureState extends State<Detailed_temperature> {
                     dataPoints2: chartData2,
                   ),
                 ),
-                Column(
-                  children: [
-                    for (int i = 0; i < 24; i++) Text('${day2Hours[i]}'),
-                  ],
-                ),
+                // Column(
+                //   children: [
+                //     for (int i = 0; i < 24; i++) Text('${day2Hours[i]}'),
+                //   ],
+                // ),
               ],
             ),
           );

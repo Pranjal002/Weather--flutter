@@ -5,7 +5,7 @@ class Future_Temperature extends StatefulWidget {
   final List<dynamic> dayList;
   final List<dynamic> tempList;
 
-  const Future_Temperature({required this.dayList,required this.tempList});
+  const Future_Temperature({required this.dayList, required this.tempList});
 
   @override
   State<Future_Temperature> createState() => _Future_TemperatureState();
@@ -18,7 +18,6 @@ class _Future_TemperatureState extends State<Future_Temperature> {
       appBar: AppBar(
         title: Text('Weather Forecast'),
         backgroundColor: Colors.blue[50],
-
       ),
       body: Container(
         width: double.infinity,
@@ -31,13 +30,20 @@ class _Future_TemperatureState extends State<Future_Temperature> {
           fit: BoxFit.cover,
         )),
         child: Padding(
-          padding: const EdgeInsets.only(left :20),
+          padding: const EdgeInsets.only(left: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20,),
-              Text("Next 7 days",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Next 7 days",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 20,
+              ),
               Card(
                 color: Colors.white,
                 elevation: 4.0,
@@ -47,24 +53,18 @@ class _Future_TemperatureState extends State<Future_Temperature> {
                 child: Container(
                   width: 350,
                   height: 180,
-
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-
-                    ],
-
+                    children: [],
                   ),
                 ),
               ),
-              SizedBox(height: 40,),
-              for(int i=0;i<4;i++)
-                NextDaystemperature(day: widget.dayList[i], temperature: widget.tempList[i]),
-
-
-
-
+              SizedBox(
+                height: 40,
+              ),
+              for (int i = 0; i < 4; i++)
+                NextDaystemperature(
+                    day: widget.dayList[i], temperature: widget.tempList[i]),
 
               // NextDaystemperature(),
               // SizedBox(height: 40,),
@@ -79,11 +79,6 @@ class _Future_TemperatureState extends State<Future_Temperature> {
               // SizedBox(height: 40,),
               //
               // NextDaystemperature(),
-
-
-
-
-
             ],
           ),
         ),

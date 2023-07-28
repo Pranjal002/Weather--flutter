@@ -17,38 +17,44 @@ class _Today_TemperatureState extends State<Today_Temperature> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.sunny),
             Column(
               children: [
-                Text("Today" ,style:TextStyle(fontSize: 28),),
-                Text("Sat,3 Aug"),
+                Text(
+                  "Kathmandu",
+                  style: TextStyle(fontSize: 34),
+                  textAlign: TextAlign.center,
+                ),
+                // Text("Sat,3 Aug"),
               ],
             )
           ],
         ),
         Text(
-          "28",
+          "28\u00B0",
           style: TextStyle(
-            fontSize: 100,
+            fontSize: 92,
           ),
+          textAlign: TextAlign.center,
         ),
-        Text("Barcelona, Spain"),
-        SizedBox(
-          height: 20,
+        Text(
+          "Partly Cloudly ",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24),
         ),
+        // SizedBox(
+        //   height: 2,
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Feels like 32"),
+            Text("H:32\u00B0"),
             SizedBox(
               width: 20,
             ),
-            Text('Sunset at 20:15'),
-
-
+            Text('L:19 \u00B0'),
           ],
         ),
-        SizedBox(height: 30,)
+
       ],
     ));
   }
